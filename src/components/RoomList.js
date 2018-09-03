@@ -24,7 +24,7 @@ class RoomList extends Component {
       return (
         <section className = 'roomList'>
           this.state.rooms.map( (room, index) =>
-            <div> {RoomList.index} </div> )
+            <div> {RoomList.value} </div> )
           </section>
       );
     }
