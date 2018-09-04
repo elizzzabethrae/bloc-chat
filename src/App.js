@@ -5,9 +5,7 @@ import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 
 
-<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"> </script>
-
-  // Initialize Firebase
+//<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"> </script>
   var config = {
     apiKey: "AIzaSyBENxI3i_nY6-_KHqk51Jbu-2qS5vcPAkI",
     authDomain: "bloc-chat-3b95e.firebaseapp.com",
@@ -28,22 +26,18 @@ class App extends Component {
           <h1 className="App-title">Welcome to Bloc Chat!</h1>
         </header>
         <p className="RoomList">
-          Here are the available rooms:
-
+          <Link to='/RoomList'>Click Here for a list of Rooms </Link>
         </p>
-        <ul>
-          <li><Link to='/RoomList'>Room List</Link></li>
-        </ul>
-        <section className='rooms'>
-        {
-        this.state.rooms.map( (room, index) =>
+
+      {/*  <section className='rooms'>
+        {this.state.rooms.map( (room, index) =>
             <div> {RoomList.value} </div>
-          )
-        }
+          )}
         </section>
+        */}
         <main>
           <Route  path="/RoomList" component = {RoomList} />
-          </main>
+        </main>
         </div>
       )
 }}
