@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+//import { Route, Link } from 'react-router-dom';
 import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
@@ -26,18 +26,12 @@ class App extends Component {
           <h1 className="App-title">Welcome to Bloc Chat!</h1>
         </header>
         <p className="RoomList">
-          <Link to='/RoomList'>Click Here for a list of Rooms </Link>
+         Here are our available rooms
         </p>
 
-      {/*  <section className='rooms'>
-        {this.state.rooms.map( (room, index) =>
-            <div> {RoomList.value} </div>
-          )}
-        </section>
-        */}
-        <main>
-          <Route  path="/RoomList" component = {RoomList} />
-        </main>
+      <RoomList
+        firebase= {firebase}
+       />
         </div>
       )
 }}
