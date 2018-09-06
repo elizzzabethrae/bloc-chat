@@ -21,12 +21,16 @@ class RoomList extends Component {
 
     handleChange(e) {
       const newState = {
-        newRoomName: e.target.value
+        newRoom: e.target.value
       }
       this.setState(newState)
     }
 
     handleSubmit(e) {
+      e.preventDefault();
+      if (!this.state.newRoom) {return
+      const newRoomName = { name: this.state.newRoom};
+      this.setState({ rooms: [...this.state.rooms, newRoomName]});
       this.roomsRef.push({
       name: newRoomName
      });
@@ -40,7 +44,7 @@ class RoomList extends Component {
             <div> {room.name} </div> )}
           </section>
           <form onSubmit={ (e) => this.handleSubmit(e) }>
-            <input type="text" value={ this.state.newRoom } onChange { (e) => this.handleChange(e) } />
+            <input type="text" value={ this.state.newRoom } onChange={ (e) => this.handleChange(e) } />
             <input type="submit" />
           </form>
         </div>
