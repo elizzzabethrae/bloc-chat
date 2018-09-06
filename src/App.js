@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 //import { Route, Link } from 'react-router-dom';
 import './App.css';
-import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
+import * as firebase from 'firebase';
 
 
 //<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"> </script>

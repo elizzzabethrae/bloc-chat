@@ -34,12 +34,12 @@ class RoomList extends Component {
       this.roomsRef.push({
       name: newRoomName
      });
-    }
+   }}
 
     render() {
       return (
         <div className = "App">
-          <section className = 'roomList'>
+          <section className = 'listOfRooms'>
             {this.state.rooms.map( (room) =>
             <div> {room.name} </div> )}
           </section>
@@ -49,7 +49,7 @@ class RoomList extends Component {
           </form>
         </div>
       );
-    }
+    };
 }
 
 export default RoomList;
