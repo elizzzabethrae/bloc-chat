@@ -30,18 +30,17 @@ class RoomList extends Component {
         const room = snapshot.val();
         room.key = snapshot.key;
         this.setState({ rooms: this.state.rooms.concat( room ) })
-        console.log(this.state.rooms);
       });
     }
 
     render() {
       return (
         <section className = "App">
-          <section className = 'roomList'>
+          <section key={this.state.rooms.key}>
            {this.state.rooms.map( (room) =>
               <div key={room.key}> {room.name} </div>)}
           </section>
-          <form onSubmit={ (newRoomName) => this.handleSubmit(newRoomName) }>
+          <form onSubmit={ this.handleSubmit(this.state.newRoomName) }>
             <input type="text" value= {  this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
             <input type="submit" />
           </form>
