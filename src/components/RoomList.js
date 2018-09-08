@@ -40,8 +40,8 @@ class RoomList extends Component {
       return (
         <section className = "App">
           <div className = 'newRoom'>
-           this.state.rooms.map( (room) =>
-             <div> {rooms.name} </div>)
+           {this.state.rooms.map( (room) =>
+              <div>{this.state.rooms.name} </div>)}
           </div>
           <form onSubmit={ (e) => this.handleSubmit(e) }>
             <input type="text" value= {  this.state.newRoom } onChange={ (e) => this.handleChange(e) } />
