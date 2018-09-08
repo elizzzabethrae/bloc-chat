@@ -38,16 +38,16 @@ class RoomList extends Component {
 
     render() {
       return (
-        <div className = "App">
-          <section className = 'newRoom'>
-            {this.state.rooms.map( (room) =>
-            <div> {room.name} </div> )}
-          </section>
+        <section className = "App">
+          <div className = 'newRoom'>
+           this.state.rooms.map( (room) =>
+             <div> {rooms.name} </div>)
+          </div>
           <form onSubmit={ (e) => this.handleSubmit(e) }>
             <input type="text" value= {  this.state.newRoom } onChange={ (e) => this.handleChange(e) } />
             <input type="submit" />
           </form>
-        </div>
+        </section>
       );
     };
 }
