@@ -19,24 +19,26 @@ class RoomList extends Component {
   }
 
   handleSubmit(newRoomName) {
-    if (!this.state.newRoomName) { return }
-    this.roomsRef.push({
-    name: newRoomName
-   });
+      if (!this.state.newRoomName) { return }
+      this.roomsRef.push({
+      name: this.state.newRoomName
+    });
+    this.setState({newRoomName: ''});
   }
 
-    componentDidMount() {
-      this.roomsRef.on('child_added', snapshot => {
-        const room = snapshot.val();
-        room.key = snapshot.key;
-        this.setState({ rooms: this.state.rooms.concat( room ) })
-      });
-    }
+  componentDidMount() {
+    this.roomsRef.on('child_added', snapshot => {
+      const room = snapshot.val();
+      room.key = snapshot.key;
+      this.setState({ rooms: this.state.rooms.concat( room ) })
+                console.log(this.state.rooms);
+    });
+  }
 
     render() {
       return (
-        <section className = "App">
-          <section key={this.state.rooms.key}>
+        <section   className = "App">
+          <section className = 'room'>
            {this.state.rooms.map( (room) =>
               <div key={room.key}> {room.name} </div>)}
           </section>
