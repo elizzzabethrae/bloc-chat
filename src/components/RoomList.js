@@ -7,6 +7,7 @@ class RoomList extends Component {
     this.state = {
       rooms: [],
       newRoomName: ''
+      //highlight active room
     };
     this.roomsRef = this.props.firebase.database().ref('rooms');
   }
@@ -23,29 +24,47 @@ class RoomList extends Component {
     this.setState({newRoomName: ''});
   }
 
+
   componentDidMount() {
     this.roomsRef.on('child_added', snapshot => {
       const room = snapshot.val();
       room.key = snapshot.key;
       this.setState({ rooms: this.state.rooms.concat( room ) })
-                console.log(this.state.rooms);
     });
   }
 
     render() {
+
       return (
-        <section   className = "App">
-          <section className = 'room'>
-           {this.state.rooms.map( (room) =>
-              <div key={room.key}> {room.name} </div>)}
-          </section>
+        <section className = "App">
+          <table>
+          <thead>
+            <tr>
+              <th> List of Rooms </th>
+            </tr>
+          </thead>
+          <tbody>
+          {this.state.rooms.map( (room) =>
+            <tr key={room.key}>
+               <td>
+                onClick = { () => this.props.setRoom(room)}
+                {room.name}
+               </td>
+            </tr>
+            )}
+          </tbody>
+        </table>
+      </section>
+      <section>
           <form onSubmit={ (e) => { e.preventDefault(); this.handleSubmit(this.state.newRoomName) } }>
             <input type="text" value= {  this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
             <input type="submit" />
           </form>
-        </section>
-      );
-    };
+      </section>
+      )
+     ;
+    }
+  ;
 }
 
 export default RoomList;

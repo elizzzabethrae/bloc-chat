@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
+import MessageList from './components/MessageList';
 
 
 //<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"> </script>
@@ -18,6 +19,14 @@ import RoomList from './components/RoomList';
 
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      //current app here
+    };
+
+
   render() {
     return (
       <div className="App">
@@ -32,7 +41,11 @@ class App extends Component {
       <RoomList
         firebase= {firebase}
        />
-       
+
+       <MessageList
+        firebase= {firebase}
+        />
+
         </div>
       )
 }}
