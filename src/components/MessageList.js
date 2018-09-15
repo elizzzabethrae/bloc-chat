@@ -5,7 +5,6 @@ class MessageList extends Component {
     super(props);
     this.state = {
       messages: []
-//highlight active room
     };
     this.roomsRef = this.props.firebase.database().ref('messages');
   }
@@ -14,7 +13,7 @@ class MessageList extends Component {
     this.roomsRef.on('child_added', snapshot => {
       const message = snapshot.val();
       message.key = snapshot.key;
-    this.setState({ messages: this.state.messages.concat( message ) }) //is this right? YES
+     this.setState({ messages: this.state.messages.concat( message ) }) //is this right? YES
     });
   }
 
@@ -24,10 +23,14 @@ class MessageList extends Component {
       <section className = "messageList">
         <section className = 'messages'>
          {this.state.messages.map( (message) =>
-            <div key={message.key}> {message.content} </div>)} // or maybe message.value as well as username
+           this.props.activeRoom == message.roomId && (
+            <div key={message.key}> {message.content} </div>))}; // or maybe message.value as well as username
         </section>
+      </section>
       //include adding new massages here with an onchange thing
     );
-  };
+  }
 
 }
+
+export default MessageList;

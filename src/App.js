@@ -5,7 +5,6 @@ import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 
-
 //<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"> </script>
   var config = {
     apiKey: "AIzaSyBENxI3i_nY6-_KHqk51Jbu-2qS5vcPAkI",
@@ -25,6 +24,7 @@ class App extends Component {
     this.state = {
       //current app here
     };
+  }
 
 
   render() {
@@ -47,8 +47,9 @@ class App extends Component {
         />
 
         </div>
-      )
-}}
+      );
+    }
+}
 
 
 export default App;
