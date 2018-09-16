@@ -22,10 +22,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //current app here
+       activeRoom: " "
     };
   }
 
+  setRoom(room) {
+    this.setState({
+      activeRoom: room.key
+    })
+  }
 
   render() {
     return (
@@ -40,10 +45,12 @@ class App extends Component {
 
       <RoomList
         firebase= {firebase}
+        setRoom = {(activeRoom) => this.setRoom(activeRoom)}
        />
 
        <MessageList
         firebase= {firebase}
+        activeRoom={this.state.activeRoom}
         />
 
         </div>

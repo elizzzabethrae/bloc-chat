@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 
-
 class RoomList extends Component {
   constructor(props) {
     super(props);
@@ -38,21 +37,21 @@ class RoomList extends Component {
 
       return (
 
-        <section className='App'>
+      <div className='App'>
         <div>
           {this.state.rooms.map( (room) =>
-            <section key= {room.key} onClick = { () => this.props.setRoom(room)}>
-           {room.name} </section>)}
+            <section key={room.key} onClick ={() => this.props.setRoom(room)}> {room.name}
+            </section>)}
         </div>
       <section className = "Form">
           <form onSubmit={ (e) => { e.preventDefault(); this.handleSubmit(this.state.newRoomName) } }>
-            <input type="text" value= {  this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
+            <input type="text" placeholder="Create New Room" value= {  this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
             <input type="submit" />
           </form>
       </section>
-      </section>
-      );
-    }
+    </div>
+    );
+  }
 }
 
 export default RoomList;

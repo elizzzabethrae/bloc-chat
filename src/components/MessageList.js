@@ -23,8 +23,13 @@ class MessageList extends Component {
       <section className = "messageList">
         <section className = 'messages'>
          {this.state.messages.map( (message) =>
-           this.props.activeRoom == message.roomId && (
-            <div key={message.key}> {message.content} </div>))}; // or maybe message.value as well as username
+           this.props.activeRoom === message.roomId && (
+            <div key={message.key}>
+              <div>User: {message.user}</div>
+              <div>Content: {message.content} </div>
+              <div>Time Stamp: { message.sentAt }</div>
+              </div>
+            ))}
         </section>
       </section>
       //include adding new massages here with an onchange thing
