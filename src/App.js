@@ -24,7 +24,7 @@ class App extends Component {
     super(props);
     this.state = {
        activeRoom: " ",
-       user: " "
+       user: null
     };
   }
 
@@ -37,11 +37,11 @@ class App extends Component {
   setUser(user) {
     if(user) {
       this.setState ({
-        user:user
+        user: user
       });
     } else {
       this.setState({
-        user: 'Guest'
+        user: null
       });
     }
   }
@@ -56,7 +56,8 @@ class App extends Component {
 
         <User
           firebase= {firebase}
-          user = {(user) => this.setUser(user)}
+          setUser = {(user) => this.setUser(user)}
+          user = {this.state.user}
           />
 
         <p className="RoomList">
