@@ -15,7 +15,7 @@ class MessageList extends Component {
     if (!this.state.newMessage) { return }
     this.messagesRef.push({
       content: this.state.newMessage,
-      roomId: this.props.activeRoom,
+      roomId: this.props.activeRoom.key,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
       user: this.props.user ? this.props.user.displayName : "Guest"
     });
@@ -49,7 +49,7 @@ class MessageList extends Component {
       <p>Chat Room: {this.props.activeRoom.name}</p>
         <section className = 'messages'>
          {this.state.messages.map( (message) =>
-           this.props.activeRoom === message.roomId && (
+           this.props.activeRoom.key === message.roomId && (
             <div key={message.key}>
               <div>User: {message.user}</div>
               <div>Message: {message.content} </div>
@@ -69,7 +69,7 @@ class MessageList extends Component {
       </section>
     );
   }
-//need to fix name of chat room
+
 }
 
 export default MessageList;

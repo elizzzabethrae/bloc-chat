@@ -30,7 +30,7 @@ class App extends Component {
 
   setRoom(room) {
     this.setState({
-      activeRoom: room.key
+      activeRoom: room
     })
   }
 
