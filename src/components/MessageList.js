@@ -4,38 +4,72 @@ class MessageList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: []
+      messages: [],
+      newMessage: ''
+
     };
-    this.roomsRef = this.props.firebase.database().ref('messages');
+    this.messagesRef = this.props.firebase.database().ref('messages');
+  }
+
+  handleSubmit (newMessage) {
+    if (!this.state.newMessage) { return }
+    this.messagesRef.push({
+      content: this.state.newMessage,
+      roomId: this.props.activeRoom,
+      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+      user: this.props.user ? this.props.user.displayName : "Guest"
+    });
+    this.setState ({newMessage:''});
+  }
+
+
+  handleChange (e) {
+    this.setState({newMessage: e.target.value});
   }
 
   componentDidMount() {
-    this.roomsRef.on('child_added', snapshot => {
+    this.messagesRef.on('child_added', snapshot => {
       const message = snapshot.val();
       message.key = snapshot.key;
-     this.setState({ messages: this.state.messages.concat( message ) }) //is this right? YES
+      const messages = this.state.messages.concat(message);
+//sort here
+     this.setState({ messages })
     });
+  }
+
+  formatTime(time) {
+    let date = new Date (time);
+    return date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
   }
 
 
   render(){
     return (
       <section className = "messageList">
+      <p>Chat Room: {this.props.activeRoom.name}</p>
         <section className = 'messages'>
          {this.state.messages.map( (message) =>
            this.props.activeRoom === message.roomId && (
             <div key={message.key}>
               <div>User: {message.user}</div>
-              <div>Content: {message.content} </div>
-              <div>Time Stamp: { message.sentAt }</div>
-              </div>
+              <div>Message: {message.content} </div>
+              <div>Time Stamp: { this.formatTime(message.sentAt) }</div>
+              <br></br>
+            </div>
             ))}
+
         </section>
+
+      <section className = "Form">
+          <form onSubmit={ (e) => { e.preventDefault(); this.handleSubmit(this.state.newMessage) } }>
+            <input type="text" placeholder="Write a Message" value= {  this.state.newMessage } onChange={ (e) => this.handleChange(e) } />
+            <input type="submit" />
+          </form>
       </section>
-      //include adding new massages here with an onchange thing
+      </section>
     );
   }
-
+//need to fix name of chat room
 }
 
 export default MessageList;
