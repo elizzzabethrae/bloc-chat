@@ -17,7 +17,7 @@ class MessageList extends Component {
       content: this.state.newMessage,
       roomId: this.props.activeRoom.key,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      user: this.props.user ? this.props.user.displayName : "Guest"
+      user: this.props.user ? this.props.user.displayName : "Guest",
     });
     this.setState ({newMessage:''});
   }
@@ -42,20 +42,33 @@ class MessageList extends Component {
     return date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
   }
 
+  deleteMessage (message) {
+       let filteredMessages = this.state.messages.filter( function( message, key)  {
+         if ( message.key === this.message.key) { // this is what we want to delete
+           return false;
+         }
+         // If it's not what we want to delete, keep it!
+         else return true;
+       })
+      this.setState({messages : filteredMessages});
+  }
+
 
   render(){
     return (
       <section className = "messageList">
       <p>Chat Room: {this.props.activeRoom.name}</p>
         <section className = 'messages'>
-         {this.state.messages.map( (message) =>
+         {this.state.messages.map( (message, index) =>
            this.props.activeRoom.key === message.roomId && (
-            <div key={message.key}>
-              <div>User: {message.user}</div>
-              <div>Message: {message.content} </div>
-              <div>Time Stamp: { this.formatTime(message.sentAt) }</div>
-              <br></br>
-            </div>
+              <div key={message.key}>
+                 <div>User: {message.user}</div>
+                 <div>Message: {message.content} </div>
+                 <div>Time Stamp: { this.formatTime(message.sentAt) }</div>
+                 <input type="button" value="Delete" onClick={() => this.deleteMessage(message)} />
+                 <br></br>
+                 <br></br>
+               </div>
             ))}
 
         </section>
